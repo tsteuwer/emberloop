@@ -1,0 +1,10 @@
+frontend:
+  build: ember.docker
+  volumes:
+    - ./front-end:/usr/local/src/front-end
+  working_dir: /usr/local/src/front-end
+  command: bash -c "npm install && bower install --allow-root && ember server --watch"
+  ports:
+    - 80:80
+    - 4200:4200
+    - 35729:35729
