@@ -32,3 +32,4 @@
 */libpeerconnection.log
 */npm-debug.log
 *testem.log
+*/async-disk-cache
