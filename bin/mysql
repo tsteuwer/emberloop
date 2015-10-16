@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+mysql_container=$(docker ps | sed -n 's/.*\b\(.*_mysql_\S\)/\1/p' | sed 's/ //g')
+
+project_path=$(git rev-parse --show-toplevel)
+sql_path=$project_path/reports-api/sql
+
+echo "Using SQL dir $sql_path"
+echo "Connecting to mysql running in $mysql_container..."
+docker run -it --rm --link $mysql_container:mysql \
+  -v $sql_path:/mnt -w /mnt \
+  percona sh -c 'exec mysql -h"mysql" -ureports -p"reports" reports'
