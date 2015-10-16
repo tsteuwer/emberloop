@@ -8,3 +8,11 @@ frontend:
     - 80:80
     - 4200:4200
     - 35729:35729
+backend:
+  build: loopback.docker
+  volumes:
+    - ./back-end:/usr/local/src/back-end
+  working_dir: /usr/local/src/back-end
+  command: bash -c "npm install && node ."
+  ports:
+    - 3000:3000

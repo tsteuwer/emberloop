@@ -1,0 +1,34 @@
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+*/*.csv
+*/*.dat
+*/*.iml
+*/*.log
+*/*.out
+*/*.pid
+*/*.seed
+*/*.sublime-*
+*/*.swo
+*/*.swp
+*/*.tgz
+*/*.xml
+*/.DS_Store
+*/.idea
+*/.project
+*/.strong-pm
+
+# compiled output
+*/dist
+*/tmp
+
+# dependencies
+*/node_modules
+*/bower_components
+
+# misc
+*/.sass-cache
+*/connect.lock
+*/coverage/*
+*/libpeerconnection.log
+*/npm-debug.log
+*testem.log
