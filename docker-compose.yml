@@ -16,3 +16,17 @@ backend:
   command: bash -c "npm install && node ."
   ports:
     - 3000:3000
+mysql:
+  image: mysql:5.6.27
+  environment:
+    - "MYSQL_ROOT_PASSWORD=notsecure"
+    - "MYSQL_USER=emberloop"
+    - "MYSQL_PASSWORD=emberloop"
+    - "MYSQL_DATABASE=emberloop"
+  volumes:
+    - ./data-base:/usr/local/src/data-base
+  ports:
+    - 3006:3006
+  links:
+    - backend:back-end
+  
