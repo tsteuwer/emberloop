@@ -2,5 +2,14 @@
   "db": {
     "name": "db",
     "connector": "memory"
+  },
+  "mysql": {
+    "name": "mysql",
+    "connector": "mysql",
+		"database": "emberloop",
+		"host": "http://localhost",
+		"port": 3600,
+		"username": "emberloop",
+		"password": "emberloop"
   }
 }

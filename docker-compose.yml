@@ -8,6 +8,7 @@ frontend:
     - 80:80
     - 4200:4200
     - 35729:35729
+    - 49152:49152
 backend:
   build: loopback.docker
   volumes:
