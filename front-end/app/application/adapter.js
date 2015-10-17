@@ -1,12 +1,17 @@
 import DS from 'ember-data';
 
-export default DS.RESTAdapter.extend({
+export default DS.JSONAPIAdapter.extend({
 	/**
 	 * Root of our api endpoint.
 	 * @public
 	 * @type {String}
 	 */
 	namespace: 'api',
+
+	/**
+	 * Short hand methods
+	 */
+	
 
 	/**
 	 * Returns the host name.

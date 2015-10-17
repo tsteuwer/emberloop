@@ -1,1 +1,15 @@
+<h2 id="title">Testing Create</h2>
+{{#if model.person.loading}}
+	Posting to the backend...
+{{/if}}
+
+{{#if model.error}}
+	<strong>Error:</strong> {{model.errorMsg}}
+{{/if}}
+
+{{#if model.success}}
+	It saved!
+{{/if}}
+
+
 {{outlet}}

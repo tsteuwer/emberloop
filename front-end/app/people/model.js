@@ -15,10 +15,10 @@ export default DS.Model.extend({
 	lastName: attr('String'),
 	age: attr('Number'),
 	createdAt: attr('Date', {
-		default: new Date()
+		defaultValue: new Date()
 	}),
 	lastModifiedAt: attr('Date', {
-		default: new Date()
+		defaultValue: new Date()
 	}),
 	fullName: computed('firstName', 'lastName', () => {
 		return `${get(this, 'firstName')} ${get(this, 'lastName')}`;

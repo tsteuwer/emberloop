@@ -8,7 +8,7 @@
     "connector": "mysql",
 		"database": "emberloop",
 		"host": "http://localhost",
-		"port": 3600,
+		"port": 3306,
 		"username": "emberloop",
 		"password": "emberloop"
   }

@@ -27,7 +27,7 @@ mysql:
   volumes:
     - ./data-base:/usr/local/src/data-base
   ports:
-    - 3006:3006
+    - 3306:3306
   links:
     - backend:back-end
   
