@@ -1,6 +1,8 @@
 # emberloop
 EmberJS and Loopback using the JSON API
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/tsteuwer/emberloop?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 ## Prerequisites
 This project requires the Docker Compose be installed locally on your machine. For details on installing this, please visit https://docs.docker.com/compose/install
 
