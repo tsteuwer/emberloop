@@ -20,7 +20,9 @@ docker-compose up
 Once all the containers have finished installing their dependencies and are up and running, you can visit the following URLs to view ember and loopback:
 
 Ember site: http://localhost:4200
+
 Loopback explorer: http://localhost:3000/explorer
+
 API lives at: http://localhost:3000/api
 
 # Troubleshooting
