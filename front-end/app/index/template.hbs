@@ -1,15 +1,13 @@
-<h2 id="title">Testing Create</h2>
-{{#if model.person.loading}}
-	Posting to the backend...
-{{/if}}
+<h2 id="title">Testing...</h2>
 
-{{#if model.error}}
-	<strong>Error:</strong> {{model.errorMsg}}
-{{/if}}
-
-{{#if model.success}}
-	It saved!
-{{/if}}
+{{#each model.testCases as |test|}}
+	<p>
+		<strong style='color:{{if test.pass 'green' 'red'}}'>
+			{{if test.pass 'PASS' 'FAIL'}}
+		</strong>
+		{{test.msg}}
+	</p>
+{{/each}}
 
 
 {{outlet}}

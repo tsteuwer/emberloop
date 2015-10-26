@@ -6,11 +6,11 @@
     "validateUpsert": true
   },
   "properties": {
-    "firstName": {
+    "first-name": {
       "type": "string",
       "required": true
     },
-    "lastName": {
+    "last-name": {
       "type": "string",
       "required": true
     },
@@ -18,10 +18,10 @@
       "type": "number",
       "required": true
     },
-		"createdAt": {
+		"created-at": {
 			"type": "date"
 		},
-		"lastModifiedAt": {
+		"last-modified-at": {
 			"type": "date"
 		}
   },

@@ -1,3 +1,4 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 
 export default DS.JSONAPISerializer.extend({
@@ -11,6 +12,6 @@ export default DS.JSONAPISerializer.extend({
  * @param {String} attr
  * @return {String}
  */
-function keyForAttribute(attr, method) {
+function keyForAttribute(attr) {
 	return Ember.String.camelize(attr);
 }
