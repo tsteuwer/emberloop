@@ -1,1 +1,0 @@
-process.chdir('front-end');
