@@ -1,0 +1,43 @@
+{
+  "name": "person",
+	"plural": "people",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "first-name": {
+      "type": "string",
+      "required": true
+    },
+    "last-name": {
+      "type": "string",
+      "required": true
+    },
+    "age": {
+      "type": "number",
+      "required": true
+    },
+    "created-at": {
+      "type": "date"
+    },
+    "last-modified-at": {
+      "type": "date"
+    },
+		"address": {
+			"type": "number",
+			"required": false
+		}
+  },
+  "validations": [],
+  "relations": {
+    "address": {
+      "type": "hasOne",
+      "model": "address",
+      "foreignKey": "person"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

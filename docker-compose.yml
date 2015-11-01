@@ -5,9 +5,9 @@ frontend:
   working_dir: /usr/local/src/front-end
   command: bash -c "npm install && bower install --allow-root && ember server --watch"
   ports:
-    - 80:80
     - 4200:4200
     - 35729:35729
+    - 49152:49152
 backend:
   build: loopback.docker
   volumes:
@@ -26,7 +26,7 @@ mysql:
   volumes:
     - ./data-base:/usr/local/src/data-base
   ports:
-    - 3006:3006
+    - 3306:3306
   links:
     - backend:back-end
   

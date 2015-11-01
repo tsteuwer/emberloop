@@ -1,0 +1,13 @@
+<h2 id="title">Testing...</h2>
+
+{{#each model.testCases as |test|}}
+	<p>
+		<strong class='{{if test.pass 'green' 'red'}}'>
+			{{if test.pass 'PASS' 'FAIL'}}
+		</strong>
+		{{test.msg}}
+	</p>
+{{/each}}
+
+
+{{outlet}}

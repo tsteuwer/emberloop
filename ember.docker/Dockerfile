@@ -2,8 +2,12 @@ FROM node:4.2.1
 
 MAINTAINER Troy Steuwer <tsteuwer@gmail.com> 
 
+#ember
 EXPOSE 4200
+
+#live reload
 EXPOSE 35729
+EXPOSE 49152
 
 RUN npm install -g gulp
 RUN npm install -g bower
