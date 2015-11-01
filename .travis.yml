@@ -20,4 +20,4 @@ before_install:
 install:
   - "npm install --no-optional"
 
-script: cd front-end && npm test
+script: process.chdir('front-end') && npm test
