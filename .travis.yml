@@ -7,15 +7,16 @@ sudo: false
 
 cache:
   directories:
-    - node_modules
-    - bower_components
-    - persistent-filter-caches
+    - front-end/node_modules
+    - front-end/bower_components
+    - front-end/persistent-filter-caches
 
 before_install:
   - "npm config set spin false"
   - "npm install -g npm@^2"
   - "npm install -g -q bower"
   - "npm --version"
+  - "bower --version"
   - "phantomjs --version"
 
-script: cd front-end/ && npm install && npm test
+script: cd front-end/ && npm install && bower install --allow-root && npm test
