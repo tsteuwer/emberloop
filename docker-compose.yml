@@ -1,4 +1,5 @@
 frontend:
+  container_name: emberloop_frontend
   build: ember.docker
   volumes:
     - ./front-end:/usr/local/src/front-end
@@ -9,6 +10,7 @@ frontend:
     - 35729:35729
     - 49152:49152
 backend:
+  container_name: emberloop_backend
   build: loopback.docker
   volumes:
     - ./back-end:/usr/local/src/back-end
