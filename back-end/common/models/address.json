@@ -1,0 +1,49 @@
+{
+  "name": "address",
+	"plural": "addresses",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "street-name": {
+      "type": "string",
+      "required": true
+    },
+    "city": {
+      "type": "string",
+      "required": true
+    },
+    "state": {
+      "type": "string",
+      "required": true
+    },
+    "country": {
+      "type": "string",
+      "required": true
+    },
+    "zip-code": {
+      "type": "string",
+      "required": true
+    },
+    "last-updated": {
+      "type": "date",
+      "required": true
+    },
+    "person": {
+      "type": "number",
+      "required": false
+    }
+  },
+  "validations": [],
+  "relations": {
+    "person": {
+      "type": "hasOne",
+      "model": "person",
+      "foreignKey": "address"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

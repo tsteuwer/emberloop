@@ -8,10 +8,9 @@ export default DS.JSONAPIAdapter.extend({
 	 */
 	namespace: 'api',
 
-	/**
-	 * Short hand methods
-	 */
-	
+	shouldReloadAll() {
+		return false;
+	},
 
 	/**
 	 * Returns the host name.

@@ -4,12 +4,12 @@
     "connector": "memory"
   },
   "mysql": {
+    "host": "http://localhost",
+    "port": 3306,
+    "database": "emberloop",
+    "username": "emberloop",
+    "password": "emberloop",
     "name": "mysql",
-    "connector": "mysql",
-		"database": "emberloop",
-		"host": "http://localhost",
-		"port": 3306,
-		"username": "emberloop",
-		"password": "emberloop"
+    "connector": "mysql"
   }
 }

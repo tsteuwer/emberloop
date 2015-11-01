@@ -2,7 +2,7 @@
 
 {{#each model.testCases as |test|}}
 	<p>
-		<strong style='color:{{if test.pass 'green' 'red'}}'>
+		<strong class='{{if test.pass 'green' 'red'}}'>
 			{{if test.pass 'PASS' 'FAIL'}}
 		</strong>
 		{{test.msg}}

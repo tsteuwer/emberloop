@@ -19,9 +19,24 @@ module.exports = function(environment) {
     },
 
 		contentSecurityPolicy: {
-			'connect-src': "'self' *"
+			'connect-src': "'self'",
+			'script-src': "'self'"
 		}
   };
+
+	const hosts = [
+		'localhost',
+		'0.0.0.0',
+		'127.0.0.1'
+	];
+
+	hosts.forEach(host => {
+		ENV.contentSecurityPolicy['connect-src'] += ` ${host}:49152/* ${host}:4200/* ${host}:3000/* *`;
+		ENV.contentSecurityPolicy['script-src'] += ` ${host}:49152/* ${host}:4200/* ${host}:3000/* *`;
+		ENV.contentSecurityPolicy['style-src'] += ` ${host}:49152/* ${host}:4200/* ${host}:3000/* *`;
+		ENV.contentSecurityPolicy['image-src'] += ` ${host}:49152/* ${host}:4200/* ${host}:3000/* *`;
+		ENV.contentSecurityPolicy['default-src'] += ` ${host}:49152/* ${host}:4200/* ${host}:3000/* *`;
+	});
 
   if (environment === 'development') {
     // ENV.APP.LOG_RESOLVER = true;
