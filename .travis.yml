@@ -23,7 +23,5 @@ cache:
     - bower_components
 
 script:
-  - docker-compose build
-  - docker ps
-  - docker ps -a
-  - docker exec -i --name emberloop_frontend ember test
+  - docker-compose up
+  - docker exec -i emberloop_frontend ember test
