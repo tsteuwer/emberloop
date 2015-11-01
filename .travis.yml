@@ -17,4 +17,4 @@ before_install:
   - "npm --version"
   - "phantomjs --version"
 
-script: test.js 
+script: node test.js 
