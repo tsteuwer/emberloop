@@ -9,10 +9,10 @@ EXPOSE 4200
 EXPOSE 35729
 EXPOSE 49152
 
-RUN npm install -g gulp
-RUN npm install -g bower
-RUN npm install -g phantomjs
-RUN npm install -g ember-cli
+RUN npm install -q -g gulp 
+RUN npm install -q -g bower
+RUN npm install -q -g phantomjs
+RUN npm install -q -g ember-cli
 
 # install watchman
 RUN \

@@ -24,4 +24,4 @@ cache:
 
 script:
   - docker-compose build
-  - docker-compose run emberloop_frontend_1 npm test
+  - docker-compose exec -i emberloop_frontend_1 ember test
