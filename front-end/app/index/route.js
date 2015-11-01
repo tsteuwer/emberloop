@@ -73,6 +73,7 @@ function getNextMethod() {
  */
 function model() {
 	return Ember.Object.create({
+		testing: true,
 		testCases: []
 	});
 }
@@ -254,9 +255,7 @@ function checkRelationshipPerson() {
 		this.store
 			.findRecord('address', addressId)
 			.then(address => {
-				console.log('address', address);
 				address.get('person').then(person => {
-					console.log(person, get(person, 'isLoaded'));
 					if (get(person, 'isLoaded') && personId === get(person, 'id')) {
 						resolve({
 							pass: true,
@@ -307,5 +306,7 @@ function tearDown() {
 			pass: true,
 			msg: `tearDown: ${error.toString()}`,
 		});
+	}).finally(() => {
+		set(this.controller, 'model.testing', false);
 	});
 }
