@@ -17,4 +17,4 @@ before_install:
   - "npm --version"
   - "phantomjs --version"
 
-script: cd front-end/ && ll && npm install && npm test
+script: cd front-end/ && npm install && npm test
