@@ -1,27 +1,26 @@
 ---
 language: node_js
 node_js:
-  - "0.12"
+  - "iojs"
 
-env:
-    DOCKER_COMPOSE_VERSION: 1.4.2
+before_script: cd front-end
 
-services:
-  - docker
-
-sudo: required
-
-before_install:
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
+sudo: false
 
 cache:
   directories:
     - node_modules
     - bower_components
+    - persistent-filter-caches
+
+before_install:
+  - "npm config set spin false"
+  - "npm install -g npm@^2"
+  - "npm --version"
+  - "phantomjs --version"
+
+install:
+- "npm install --no-optional"
 
 script:
-  - docker-compose up
-  - docker exec -i emberloop_frontend ember test
+- npm test
