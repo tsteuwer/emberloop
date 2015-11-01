@@ -3,8 +3,6 @@ language: node_js
 node_js:
   - "iojs"
 
-before_script: cd front-end
-
 sudo: false
 
 cache:
@@ -20,7 +18,7 @@ before_install:
   - "phantomjs --version"
 
 install:
-- "npm install --no-optional"
+  - "npm install --no-optional"
 
 script:
-- npm test
+  - cd front-end npm test
