@@ -1,10 +1,12 @@
 # emberloop
-EmberJS and Loopback using the [JSON API Component for Loopback](https://github.com/digitalsadhu/loopback-component-jsonapi).
+A "proof-of-concept" using [EmberJS](http://emberjs.com) (front-end) and [Loopback](http://loopback.io) (back-end) using the [JSON API Component for Loopback](https://github.com/digitalsadhu/loopback-component-jsonapi).
 
 [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/tsteuwer/emberloop?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge) [![Build Status](https://travis-ci.org/tsteuwer/emberloop.svg?branch=master)](https://travis-ci.org/tsteuwer/emberloop)
 
 ## Prerequisites
-This project requires the Docker Compose be installed locally on your machine. For details on installing this, please visit https://docs.docker.com/compose/install
+This project requires that [Docker](https://docker.com) and [Docker-Compose](https://docs.docker.com/compose/install) be installed locally on your machine.
+- Docker 1.8.3+
+- Docker-Compose 1.4.2+
 
 ## Starting The Project
 First, you need to clone the repository onto your machine:
@@ -21,15 +23,13 @@ docker-compose up
 
 Once all the containers have finished installing their dependencies and are up and running, you can visit the following URLs to view ember and loopback:
 
-Ember site: http://localhost:4200
-
-Loopback explorer: http://localhost:3000/explorer
-
-API lives at: http://localhost:3000/api
+- **Actual tests with backend**: http://localhost:4200
+- **API**: http://localhost:3000/api
+- **Loopback API Explorer**: http://localhost:3000/explorer
 
 ## Interacting With Containers
 
-There's a `/bin` folder which supplies various functions for linux users. To run them, go to the main `emberloop` directory and type the following in your terminal:
+There's a `/bin` folder which supplies various bash functions for Unix users. To run them, go to the main `emberloop` directory and use the following commands:
 
 ### EmberJS
 
