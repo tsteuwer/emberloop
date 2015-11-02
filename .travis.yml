@@ -20,4 +20,8 @@ before_install:
   - "bower --version"
   - "phantomjs --version"
 
-script: cd front-end/ && bower install --allow-root && npm install && npm test
+script:
+  - cd front-end/
+  - bower install --allow-root
+  - npm install
+  - ember test
