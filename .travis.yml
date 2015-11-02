@@ -1,7 +1,7 @@
 ---
 language: node_js
 node_js:
-  - "iojs"
+  - "node:4.2.1"
 
 sudo: false
 
@@ -21,7 +21,4 @@ before_install:
   - "phantomjs --version"
 
 script:
-  - cd front-end/
-  - bower install --allow-root
-  - npm install
-  - ember test
+  - cd front-end/ && bower install --allow-root && npm install && ember test
