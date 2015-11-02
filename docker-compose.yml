@@ -1,19 +1,21 @@
 frontend:
+  container_name: emberloop_frontend
   build: ember.docker
   volumes:
     - ./front-end:/usr/local/src/front-end
   working_dir: /usr/local/src/front-end
-  command: bash -c "npm install && bower install --allow-root && ember server --watch"
+  command: bash -c "npm install -q && bower install -q --allow-root && ember server --watch"
   ports:
     - 4200:4200
     - 35729:35729
     - 49152:49152
 backend:
+  container_name: emberloop_backend
   build: loopback.docker
   volumes:
     - ./back-end:/usr/local/src/back-end
   working_dir: /usr/local/src/back-end
-  command: bash -c "npm install && node ."
+  command: bash -c "npm install -q && node ."
   ports:
     - 3000:3000
 mysql:

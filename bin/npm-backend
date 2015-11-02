@@ -1,2 +1,2 @@
 #! /usr/bin/env bash
-docker exec -it emberloop_backend_1 npm $@
+docker exec -it emberloop_backend npm $@
