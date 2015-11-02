@@ -108,7 +108,7 @@ function post() {
 				if (get(this, 'personId') === '') {
 					run(() => set(this, 'personId', record.get('id')));
 				}
-			}).catch(() => {
+			}).catch(error => {
 				reject({
 					pass: false,
 					msg: `POST /person (reason: ${error.toString()})`
@@ -143,7 +143,7 @@ function getById() {
 				pass: true,
 				msg: 'GET /person/:id'
 			});
-		}).catch(() => {
+		}).catch(error => {
 			reject({
 				pass: false,
 				msg: `GET /person/:id (reason: ${error.toString()})`
@@ -173,7 +173,7 @@ function postAddress() {
 				msg: 'POST /address/',
 			});
 		}).catch(error => {
-			resolve({
+			reject({
 				pass: false,
 				msg: `POST /address/ (reason: ${error.toString()})`,
 			});
@@ -196,7 +196,7 @@ function addRelationship() {
 				msg: 'PATCH /person/:id',
 			});
 		}).catch(error => {
-			resolve({
+			reject({
 				pass: false,
 				msg: `PATCH /person/:id (reason: ${error.toString()})`,
 			});
@@ -228,14 +228,14 @@ function checkRelationshipAddress() {
 						});
 					}
 				}).catch(error => {
-					resolve({
+					reject({
 						pass: false,
 						msg: `GET /address/:id by relationship (reason: ${error.toString()})`,
 					});
 				});
 
 			}).catch(error => {
-				resolve({
+				reject({
 					pass: false,
 					msg: `GET /address/:id by relationship (reason: ${error.toString()})`,
 				});
@@ -262,20 +262,20 @@ function checkRelationshipPerson() {
 							msg: 'GET /person/:id by relationship',
 						});
 					} else {
-						resolve({
+						reject({
 							pass: false,
 							msg: 'GET /person/:id by relationship',
 						});
 					}
 				}).catch(error => {
-					resolve({
+					reject({
 						pass: false,
 						msg: `GET /person/:id by relationship (reason: ${error.toString()})`,
 					});
 				});
 
 			}).catch(error => {
-				resolve({
+				reject({
 					pass: false,
 					msg: `GET /person/:id by relationship (reason: ${error.toString()})`,
 				});
@@ -290,23 +290,25 @@ function tearDown() {
 	};
 	
 	return new Promise((resolve, reject) => {
-		for (let i in records) {
-			records[i].forEach(model => {
-				model.destroyRecord();
-				model.save();
+		try {
+			for (let i in records) {
+				records[i].forEach(model => {
+					model.destroyRecord();
+					model.save();
+				});
+			}
+
+			resolve({
+				pass: true,
+				msg: 'All Records Deleted!',
+			});
+		} catch (error) {
+			reject({
+				pass: true,
+				msg: `tearDown: ${error.toString()}`,
 			});
 		}
-
-		resolve({
-			pass: true,
-			msg: 'All Records Deleted!',
-		});
-	}).catch(error => {
-		resolve({
-			pass: true,
-			msg: `tearDown: ${error.toString()}`,
-		});
-	}).finally(() => {
+	}).catch(() => {
 		set(this.controller, 'model.testing', false);
 	});
 }
