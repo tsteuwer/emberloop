@@ -21,7 +21,7 @@ export default DS.Model.extend({
 	lastModifiedAt: attr('Date', {
 		defaultValue: new Date()
 	}),
-	fullName: computed('firstName', 'lastName', () => {
+	fullName: computed('firstName', 'lastName', function() {
 		return `${get(this, 'firstName')} ${get(this, 'lastName')}`;
 	}),
 	address: belongsTo('address', {

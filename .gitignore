@@ -16,6 +16,7 @@
 */.idea
 */.project
 */.strong-pm
+*.swp
 
 # compiled output
 */dist

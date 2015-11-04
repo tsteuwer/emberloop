@@ -1,9 +1,15 @@
+import Ember from 'ember';
 import DS from 'ember-data';
 
 const {
 	attr,
 	belongsTo
 } = DS;
+
+const {
+	computed,
+	get
+} = Ember;
 
 export default DS.Model.extend({
 	streetName: attr('String'),
@@ -16,5 +22,17 @@ export default DS.Model.extend({
 	}),
 	person: belongsTo('person', {
 		async: true
+	}),
+	fullAddress: computed('streetName', 'city', 'state', 'zipCode', 'country', function() {
+		let text = '';
+		const attrs = ['streetName', 'city', 'state', 'zipCode'];
+
+		attrs.forEach(attr => {
+			if (get(this, `${attr}.length`)) {
+				text += (text.length ? ', ' : '') + get(this, attr);
+			}
+		});
+
+		return text;
 	})
 });
