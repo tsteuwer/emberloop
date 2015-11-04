@@ -1,8 +1,8 @@
 {
-  "name": "front-end",
-  "version": "0.0.0",
-  "description": "Small description for front-end goes here",
-  "private": true,
+  "name": "emberloop",
+  "version": "1.0.0",
+  "description": "A proof of concept of using EmberJS and Loopback with the JSONAPI component.",
+  "private": false,
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -12,11 +12,13 @@
     "start": "ember server",
     "test": "ember test"
   },
-  "repository": "",
+  "repository": {
+		"url": "https://github.com/tsteuwer/emberloop"
+	},
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "Troy Steuwer <tsteuwer@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.1.2",

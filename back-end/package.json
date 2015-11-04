@@ -1,6 +1,8 @@
 {
   "name": "emberloop",
   "version": "1.0.0",
+  "description": "A proof of concept of using EmberJS and Loopback with the JSONAPI component.",
+  "private": false,
   "main": "server/server.js",
   "scripts": {
     "pretest": "jshint ."
@@ -20,8 +22,6 @@
     "jshint": "^2.5.6"
   },
   "repository": {
-    "type": "",
-    "url": ""
-  },
-  "description": "emberloop"
+		"url": "https://github.com/tsteuwer/emberloop"
+	}
 }
