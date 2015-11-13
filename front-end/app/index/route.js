@@ -415,11 +415,16 @@ function tearDown() {
 			});
 		} catch (error) {
 			reject({
-				pass: true,
+				pass: false,
 				msg: `tearDown: ${error.toString()}`,
 			});
 		}
-	}).catch(() => {
+	}).catch(error => {
+		get(this.controller, 'model.testCases').pushObject({
+			pass: false,
+			msg: `tearDown error: ${error.toString()}`,
+		});
+	}).finally(() => {
 		set(this.controller, 'model.testing', false);
 	});
 }
