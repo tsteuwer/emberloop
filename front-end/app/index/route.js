@@ -11,6 +11,26 @@ const {
 	Promise
 } = RSVP;
 
+const addresses = [{
+	firstName: 'Joe',
+	lastName: 'Shmoe',
+	age: 31,
+	createdAt: new Date(),
+	lastModifiedAt: new Date()
+}, {
+	firstName: 'Betty',
+	lastName: 'Boop',
+	age: 50,
+	createdAt: new Date(),
+	lastModifiedAt: new Date()
+}, {
+	firstName: 'John',
+	lastName: 'Smith',
+	age: 71,
+	createdAt: new Date(),
+	lastModifiedAt: new Date()
+}];
+
 /**
  * Our index route.
  * @public
@@ -24,19 +44,24 @@ export default Ember.Route.extend({
 	addressId: '',
 	post,
 	getById,
+	getByFilter,
 	getAll,
 	postAddress,
+	getIncludedRelationship,
 	addRelationship,
 	checkRelationshipAddress,
 	checkRelationshipPerson,
 	tearDown,
+	unloadSpecialPerson,
 	methods: [
 		'post',
 		'post',
 		'post',
-		'getAll',
 		'getById',
+		'getByFilter',
+		'getAll',
 		'postAddress',
+		'getIncludedRelationship',
 		'addRelationship',
 		'checkRelationshipAddress',
 		'checkRelationshipPerson',
@@ -87,27 +112,41 @@ function afterModel() {
 	}
 }
 
+function unloadSpecialPerson() {
+	run(() => {
+		const personId = get(this, 'personId');
+		const addressId = get(this, 'addressId');
+
+		const personRecord = this.store.peekRecord('person', personId);
+		const addressRecord = this.store.peekRecord('address', addressId);
+
+		if (personRecord) {
+			personRecord.unloadRecord();
+		}
+
+		if (addressRecord) {
+			addressRecord.unloadRecord();
+		}
+	});
+}
+
 function post() {
 	return new Promise((resolve, reject) => {
-		const record = this.store.createRecord('person', {
-			firstName: 'Joe',
-			lastName: 'Shmoe',
-			age: 31,
-			createdAt: new Date(),
-			lastModifiedAt: new Date()
-		});
+		const record = this.store.createRecord('person', addresses.pop());
 
 		record
 			.save()
 			.then(() => {
-				resolve({
-					pass: true,
-					msg: 'POST /person/'
-				});
-				
 				if (get(this, 'personId') === '') {
 					run(() => set(this, 'personId', record.get('id')));
 				}
+
+				record.unloadRecord();
+
+				resolve({
+					pass: true,
+					msg: `POST /person/ (id: ${record.get("id")})`
+				});
 			}).catch(error => {
 				reject({
 					pass: false,
@@ -119,7 +158,7 @@ function post() {
 
 function getAll() {
 	return new Promise((resolve, reject) => {
-		this.store.findAll('person').then((people) => {
+		this.store.findAll('person').then(people => {
 			const found = get(people, 'length');
 			resolve({
 				pass: found === 3,
@@ -147,6 +186,33 @@ function getById() {
 			reject({
 				pass: false,
 				msg: `GET /person/:id (reason: ${error.toString()})`
+			});
+		});
+	});
+}
+
+function getByFilter() {
+	return new Promise((resolve, reject) => {
+		this.store.queryRecord('person', {
+			filter: {
+				firstName: 'John'
+			}
+		}).then(records => {
+			if (get(records, 'length') === 1) {
+				resolve({
+					pass: true,
+					msg: `GET /person?filter[firstName]=John (id: ${records.get("id")})`
+				});
+			} else {
+				reject({
+					pass: false,
+					msg: `GET /person?filter[firstName]=John (returned ${get(records, 'length')} instead of returning 1)`
+				});
+			}
+		}).catch(error => {
+			reject({
+				pass: false,
+				msg: `GET /person?filter[firstName]=John (reason: ${error.toString()})`
 			});
 		});
 	});
@@ -181,6 +247,44 @@ function postAddress() {
 	});
 }
 
+function getIncludedRelationship() {
+	this.unloadSpecialPerson();
+	
+	return new Promise((resolve, reject) => {
+		this.store.queryRecord('person', {
+			filter: {
+				id: get(this, 'personId')
+			},
+			include: 'address'
+		}).then(person => {
+			if (get(person, 'length') === 1) {
+				const addy = this.store.peekRecord('address', get(this, 'addressId'));
+				if (addy) {
+					resolve({
+						pass: true,
+						msg: `GET /person?filter[id]=${get(this, 'personId')}&include=address`,
+					});
+				} else {
+					reject({
+						pass: false,
+						msg: `GET /person?filter[id]=${get(this, 'personId')}&include=address (failed to include the address resource)`,
+					});
+				}
+			} else {
+				reject({
+					pass: false,
+					msg: `GET /person?filter[id]=${get(this, 'personId')}&include=address (returned ${get(person, 'length')} instead of 1)`,
+				});
+			}
+		}).catch(error => {
+			reject({
+				pass: false,
+				msg: `GET /person?filter[id]=${get(this, 'personId')}&include=address (reason: ${error.toString()})`,
+			});
+		});
+	});
+}
+
 function addRelationship() {
 	return new Promise((resolve, reject) => {
 		const person = this.store.peekRecord('person', get(this, 'personId'));
@@ -203,20 +307,19 @@ function addRelationship() {
 		});
 	});
 }
+
 function checkRelationshipAddress() {
 	return new Promise((resolve, reject) => {
 		const personId = get(this, 'personId');
 		const addressId = get(this, 'addressId');
 
-		// Remove the records from our data store.
-		this.store.peekRecord('person', personId).unloadRecord();
-		this.store.peekRecord('address', addressId).unloadRecord();
+		this.unloadSpecialPerson();
 
 		this.store
 			.findRecord('person', personId)
-			.then((person) => {
+			.then(person => {
 				person.get('address').then(address => {
-					if (get(address, 'isLoaded') && addressId === get(address, 'id')) {
+					if (address && get(address, 'isLoaded') && addressId === get(address, 'id')) {
 						resolve({
 							pass: true,
 							msg: 'GET /address/:id by relationship',
@@ -240,6 +343,11 @@ function checkRelationshipAddress() {
 					msg: `GET /address/:id by relationship (reason: ${error.toString()})`,
 				});
 			});
+	}).catch(error => {
+		get(this.controller, 'model.testCases').pushObject({
+			pass: false,
+			msg: `GET /address/:id by relationship (reason: ${error.toString()})`,
+		});
 	});
 }
 
@@ -248,9 +356,7 @@ function checkRelationshipPerson() {
 		const personId = get(this, 'personId');
 		const addressId = get(this, 'addressId');
 
-		// Remove the records from our data store.
-		this.store.peekRecord('person', personId).unloadRecord();
-		this.store.peekRecord('address', addressId).unloadRecord();
+		this.unloadSpecialPerson();
 
 		this.store
 			.findRecord('address', addressId)
@@ -280,6 +386,11 @@ function checkRelationshipPerson() {
 					msg: `GET /person/:id by relationship (reason: ${error.toString()})`,
 				});
 			});
+	}).catch(error => {
+		get(this.controller, 'model.testCases').pushObject({
+			pass: false,
+			msg: `GET /person/:id by relationship (reason: ${error.toString()})`,
+		});
 	});
 }
 
