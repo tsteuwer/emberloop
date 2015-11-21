@@ -398,11 +398,23 @@ function tearDown() {
 					model.save();
 				});
 			}
-
-			resolve({
-				pass: true,
-				msg: 'All Records Deleted!',
-			});
+			
+			this.store
+				.findRecord('person', get(this, 'personId'))
+					.then(person => {
+						person.destroyRecord();
+						person.save().then(() => {
+							resolve({
+								pass: true,
+								msg: 'All Records Deleted!',
+							});
+						});
+					}).catch(err => {
+						resolve({
+							pass: false,
+							msg: 'Final `person` record not deleted! (reason: ' + err.toString() + ')',
+						});
+					});
 		} catch (error) {
 			reject({
 				pass: false,
