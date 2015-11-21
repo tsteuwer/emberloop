@@ -343,11 +343,6 @@ function checkRelationshipAddress() {
 					msg: `GET /address/:id by relationship (reason: ${error.toString()})`,
 				});
 			});
-	}).catch(error => {
-		get(this.controller, 'model.testCases').pushObject({
-			pass: false,
-			msg: `GET /address/:id by relationship (reason: ${error.toString()})`,
-		});
 	});
 }
 
@@ -386,11 +381,6 @@ function checkRelationshipPerson() {
 					msg: `GET /person/:id by relationship (reason: ${error.toString()})`,
 				});
 			});
-	}).catch(error => {
-		get(this.controller, 'model.testCases').pushObject({
-			pass: false,
-			msg: `GET /person/:id by relationship (reason: ${error.toString()})`,
-		});
 	});
 }
 
@@ -419,11 +409,6 @@ function tearDown() {
 				msg: `tearDown: ${error.toString()}`,
 			});
 		}
-	}).catch(error => {
-		get(this.controller, 'model.testCases').pushObject({
-			pass: false,
-			msg: `tearDown error: ${error.toString()}`,
-		});
 	}).finally(() => {
 		set(this.controller, 'model.testing', false);
 	});

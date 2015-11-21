@@ -27,6 +27,14 @@ Once all the containers have finished installing their dependencies and are up a
 - **API**: http://localhost:3000/api
 - **Loopback API Explorer**: http://localhost:3000/explorer
 
+## Current Versions
+
+- Node: 4.2.1
+-- Ember-CLI: 1.13.8
+- Node: 4.2.1
+-- Strongloop: Latest
+-- JSON API Component: 0.7.1
+
 ## Interacting With Containers
 
 There's a `/bin` folder which supplies various bash functions for Unix users. To run them, go to the main `emberloop` directory and use the following commands:

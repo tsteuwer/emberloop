@@ -1,7 +1,7 @@
 {
   "name": "front-end",
   "version": "0.0.0",
-  "description": "Small description for front-end goes here",
+  "description": "This is for ember and the front-end, itself.",
   "private": true,
   "directories": {
     "doc": "doc",
@@ -16,7 +16,7 @@
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "Troy Steuwer <tsteuwer@gmail.com>",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.1.2",
