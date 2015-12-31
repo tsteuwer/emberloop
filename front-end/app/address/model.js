@@ -12,12 +12,12 @@ const {
 } = Ember;
 
 export default DS.Model.extend({
-	streetName: attr('String'),
-	city: attr('String'),
-	state: attr('String'),
-	zipCode: attr('String'),
-	country: attr('String'),
-	lastUpdated: attr('Date', {
+	streetName: attr('string'),
+	city: attr('string'),
+	state: attr('string'),
+	zipCode: attr('string'),
+	country: attr('string'),
+	lastUpdated: attr('date', {
 		defaultValue: new Date()
 	}),
 	person: belongsTo('person', {

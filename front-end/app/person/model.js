@@ -12,19 +12,19 @@ const {
 } = Ember;
 
 export default DS.Model.extend({
-	firstName: attr('String'),
-	lastName: attr('String'),
-	age: attr('Number'),
-	createdAt: attr('Date', {
+	firstName: attr('string'),
+	lastName: attr('string'),
+	age: attr('number'),
+	createdAt: attr('date', {
 		defaultValue: new Date()
 	}),
-	lastModifiedAt: attr('Date', {
+	lastModifiedAt: attr('date', {
 		defaultValue: new Date()
-	}),
-	fullName: computed('firstName', 'lastName', function() {
-		return `${get(this, 'firstName')} ${get(this, 'lastName')}`;
 	}),
 	address: belongsTo('address', {
 		async: true
+	}),
+	fullName: computed('firstName', 'lastName', function() {
+		return `${get(this, 'firstName')} ${get(this, 'lastName')}`;
 	})
 });

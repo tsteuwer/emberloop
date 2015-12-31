@@ -25,7 +25,7 @@
     "last-modified-at": {
       "type": "date"
     },
-		"address": {
+		"address-id": {
 			"type": "number",
 			"required": false
 		}
@@ -35,7 +35,7 @@
     "address": {
       "type": "hasOne",
       "model": "address",
-      "foreignKey": "person"
+      "foreignKey": "person-id"
     }
   },
   "acls": [],

@@ -290,7 +290,6 @@ function addRelationship() {
 	return new Promise((resolve, reject) => {
 		const person = this.store.peekRecord('person', get(this, 'personId'));
 		const address = this.store.peekRecord('address', get(this, 'addressId'));
-
 		run(() => {
 			person.set('address', address);
 		});
@@ -358,7 +357,7 @@ function checkRelationshipPerson() {
 			.findRecord('address', addressId)
 			.then(address => {
 				address.get('person').then(person => {
-					if (get(person, 'isLoaded') && personId === get(person, 'id')) {
+					if (person && get(person, 'isLoaded') && personId === get(person, 'id')) {
 						resolve({
 							pass: true,
 							msg: 'GET /person/:id by relationship',
@@ -399,23 +398,11 @@ function tearDown() {
 					model.save();
 				});
 			}
-			
-			this.store
-				.findRecord('person', get(this, 'personId'))
-					.then(person => {
-						person.destroyRecord();
-						person.save().then(() => {
-							resolve({
-								pass: true,
-								msg: 'All Records Deleted!',
-							});
-						});
-					}).catch(err => {
-						resolve({
-							pass: false,
-							msg: 'Final `person` record not deleted! (reason: ' + err.toString() + ')',
-						});
-					});
+
+			resolve({
+				pass: true,
+				msg: 'All Records Deleted!',
+			});
 		} catch (error) {
 			reject({
 				pass: false,

@@ -31,7 +31,7 @@
       "type": "date",
       "required": true
     },
-    "person": {
+    "person-id": {
       "type": "number",
       "required": false
     }
@@ -41,7 +41,7 @@
     "person": {
       "type": "hasOne",
       "model": "person",
-      "foreignKey": "address"
+      "foreignKey": "address-id"
     }
   },
   "acls": [],
