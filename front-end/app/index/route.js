@@ -141,8 +141,6 @@ function post() {
 					run(() => set(this, 'personId', record.get('id')));
 				}
 
-				record.unloadRecord();
-
 				resolve({
 					pass: true,
 					msg: `POST /person/ (id: ${record.get("id")})`
@@ -195,24 +193,26 @@ function getByFilter() {
 	return new Promise((resolve, reject) => {
 		this.store.queryRecord('person', {
 			filter: {
-				firstName: 'John'
+				where: {
+					'first-name': 'John'
+				}
 			}
 		}).then(records => {
 			if (get(records, 'length') === 1) {
 				resolve({
 					pass: true,
-					msg: `GET /person?filter[firstName]=John (id: ${records.get("id")})`
+					msg: `GET /person?filter[where][first-name]=John (id: ${records[0].get("id")})`
 				});
 			} else {
 				reject({
 					pass: false,
-					msg: `GET /person?filter[firstName]=John (returned ${get(records, 'length')} instead of returning 1)`
+					msg: `GET /person?filter[where][first-name]=John (returned ${get(records, 'length')} instead of returning 1)`
 				});
 			}
 		}).catch(error => {
 			reject({
 				pass: false,
-				msg: `GET /person?filter[firstName]=John (reason: ${error.toString()})`
+				msg: `GET /person?filter[where][first-name]=John (reason: ${error.toString()})`
 			});
 		});
 	});
@@ -248,12 +248,13 @@ function postAddress() {
 }
 
 function getIncludedRelationship() {
-	this.unloadSpecialPerson();
-	
 	return new Promise((resolve, reject) => {
+		this.store.unloadAll('person');
 		this.store.queryRecord('person', {
 			filter: {
-				id: get(this, 'personId')
+				where: {
+					id: get(this, 'personId')
+				}
 			},
 			include: 'address'
 		}).then(person => {
@@ -262,24 +263,24 @@ function getIncludedRelationship() {
 				if (addy) {
 					resolve({
 						pass: true,
-						msg: `GET /person?filter[id]=${get(this, 'personId')}&include=address`,
+						msg: `GET /person?filter[where][id]=${get(this, 'personId')}&include=address`,
 					});
 				} else {
 					reject({
 						pass: false,
-						msg: `GET /person?filter[id]=${get(this, 'personId')}&include=address (failed to include the address resource)`,
+						msg: `GET /person?filter[where][id]=${get(this, 'personId')}&include=address (failed to include the address resource)`,
 					});
 				}
 			} else {
 				reject({
 					pass: false,
-					msg: `GET /person?filter[id]=${get(this, 'personId')}&include=address (returned ${get(person, 'length')} instead of 1)`,
+					msg: `GET /person?filter[where][id]=${get(this, 'personId')}&include=address (returned ${get(person, 'length')} instead of 1)`,
 				});
 			}
 		}).catch(error => {
 			reject({
 				pass: false,
-				msg: `GET /person?filter[id]=${get(this, 'personId')}&include=address (reason: ${error.toString()})`,
+				msg: `GET /person?filter[where][id]=${get(this, 'personId')}&include=address (reason: ${error.toString()})`,
 			});
 		});
 	});
