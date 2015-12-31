@@ -322,25 +322,26 @@ function checkRelationshipAddress() {
 					if (address && get(address, 'isLoaded') && addressId === get(address, 'id')) {
 						resolve({
 							pass: true,
-							msg: 'GET /address/:id by relationship',
+							msg: 'GET /people/:id/address by relationship',
 						});
 					} else {
 						resolve({
 							pass: false,
-							msg: 'GET /address/:id by relationship',
+							msg: 'GET /people/:id/address by relationship',
+							href: 'https://github.com/digitalsadhu/loopback-component-jsonapi/issues/84'
 						});
 					}
 				}).catch(error => {
 					reject({
 						pass: false,
-						msg: `GET /address/:id by relationship (reason: ${error.toString()})`,
+						msg: `GET /people/:id/address by relationship (reason: ${error.toString()})`,
 					});
 				});
 
 			}).catch(error => {
 				reject({
 					pass: false,
-					msg: `GET /address/:id by relationship (reason: ${error.toString()})`,
+					msg: `GET /people/:id/address by relationship (reason: ${error.toString()})`,
 				});
 			});
 	});
@@ -360,25 +361,26 @@ function checkRelationshipPerson() {
 					if (person && get(person, 'isLoaded') && personId === get(person, 'id')) {
 						resolve({
 							pass: true,
-							msg: 'GET /person/:id by relationship',
+							msg: 'GET /addresses/:id/person by relationship',
 						});
 					} else {
 						reject({
 							pass: false,
-							msg: 'GET /person/:id by relationship',
+							msg: 'GET /addresses/:id/person by relationship',
+							href: 'https://github.com/digitalsadhu/loopback-component-jsonapi/issues/84'
 						});
 					}
 				}).catch(error => {
 					reject({
 						pass: false,
-						msg: `GET /person/:id by relationship (reason: ${error.toString()})`,
+						msg: `GET /addresses/:id/person by relationship (reason: ${error.toString()})`,
 					});
 				});
 
 			}).catch(error => {
 				reject({
 					pass: false,
-					msg: `GET /person/:id by relationship (reason: ${error.toString()})`,
+					msg: `GET /addresses/:id/person by relationship (reason: ${error.toString()})`,
 				});
 			});
 	});

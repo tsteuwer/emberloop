@@ -6,6 +6,12 @@
 			{{if test.pass 'PASS' 'FAIL'}}
 		</strong>
 		{{test.msg}}
+
+		{{#if test.href}}
+			<a href="{{{test.href}}}" target="_blank">
+				(read)
+			</a>
+		{{/if}}
 	</p>
 {{/each}}
 
